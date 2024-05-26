@@ -1,58 +1,96 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useVideos } from "../hooks/useVideos";
+import React, { useState, useEffect, useRef } from "react";
+import { useVideos } from "@/hooks/useVideos";
 import Image from "next/image";
 
 const MainBanner: React.FC = () => {
   const { data: videos, isLoading, error } = useVideos("Web Main slider");
-  const [currentBanner, setCurrentBanner] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const touchStartXRef = useRef<number>(0);
+  const touchEndXRef = useRef<number>(0);
+  const touchThreshold = 50;
 
   useEffect(() => {
     if (videos && videos.length > 0) {
-      setCurrentBanner(videos[0].bannerImage);
+      setCurrentIndex(0);
     }
   }, [videos]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.targetTouches[0].clientX;
+    console.log("Touch Start:", touchStartXRef.current);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndXRef.current = e.targetTouches[0].clientX;
+    console.log("Touch Move:", touchEndXRef.current);
+  };
+
+  const handleTouchEnd = () => {
+    console.log(
+      "Touch End - Start:",
+      touchStartXRef.current,
+      "End:",
+      touchEndXRef.current
+    );
+    if (touchStartXRef.current - touchEndXRef.current > touchThreshold) {
+      // Swipe left
+      setCurrentIndex((prevIndex) =>
+        prevIndex === videos!.length - 1 ? 0 : prevIndex + 1
+      );
+    }
+
+    if (touchEndXRef.current - touchStartXRef.current > touchThreshold) {
+      // Swipe right
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? videos!.length - 1 : prevIndex - 1
+      );
+    }
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  const handleShowClick = (bannerImage: string) => {
-    setCurrentBanner(bannerImage);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % videos!.length);
-  };
-
   return (
     <div>
       <div
-        className="relative h-[80vh] bg-cover bg-center"
-        style={{ backgroundImage: `url(${currentBanner})` }}
+        className="relative h-[95vh] bg-cover bg-center transition-all duration-500 ease-in-out"
+        style={{ backgroundImage: `url(${videos![currentIndex].bannerImage})` }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-end p-8">
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end justify-end p-20">
           <div className="text-right text-white">
-            <h1 className="text-4xl font-bold mb-4">
+            <h1 className="text-6xl font-bold mb-4">
               {videos![currentIndex].name}
             </h1>
-            <p className="mb-8">{videos![currentIndex].description}</p>
+            <p className="mb-8 max-w-lg text-lg">
+              {videos![currentIndex].description}
+            </p>
             <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
               Watch Now
             </button>
           </div>
         </div>
 
-        <div className="absolute inset-0 flex justify-center mt-4 space-x-4 z-10">
+        <div className="absolute left-0 bottom-0 flex items-center p-4 space-x-4 z-10">
           {videos &&
-            videos.map((video) => (
-              <Image
-                key={video.name}
-                src={video.portraitImage}
-                alt={video.name}
-                width={100}
-                height={300}
-                className="h-24 cursor-pointer hover:opacity-75"
-                onClick={() => handleShowClick(video.bannerImage)}
-              />
-            ))}
+            videos
+              .slice(0, 6)
+              .map((video, index) => (
+                <Image
+                  key={video.name}
+                  src={video.portraitImage}
+                  alt={video.name}
+                  width={100}
+                  height={150}
+                  className={`cursor-pointer hover:opacity-75 ${
+                    currentIndex === index ? "opacity-100" : "opacity-50"
+                  }`}
+                  onClick={() => setCurrentIndex(index)}
+                />
+              ))}
         </div>
       </div>
     </div>

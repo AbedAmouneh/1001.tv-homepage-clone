@@ -23,7 +23,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed w-full p-4 flex justify-between items-center transition-colors duration-300 text-white`}
+      className={`fixed z-50 top-0 w-full p-4 flex justify-between items-center transition-colors duration-300 text-white`}
       style={{
         backgroundColor: scrolled ? "rgba(0, 0, 0, 0.8)" : "transparent",
       }}

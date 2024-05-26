@@ -8,6 +8,9 @@ const Home: React.FC = () => {
     { title: "Show 1", imageUrl: "/path/to/image1.jpg" },
     { title: "Show 2", imageUrl: "/path/to/image2.jpg" },
     // Add more items...
+    { title: "Show 3", imageUrl: "/path/to/image3.jpg" },
+    { title: "Show 4", imageUrl: "/path/to/image4.jpg" },
+    { title: "test 5", imageUrl: "https://via.placeholder.com/150" },
   ];
 
   const originalsItems = [
