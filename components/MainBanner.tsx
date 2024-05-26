@@ -54,7 +54,7 @@ const MainBanner: React.FC = () => {
   return (
     <div>
       <div
-        className="relative h-[95vh] bg-cover bg-center transition-all duration-500 ease-in-out"
+        className="relative h-[100vh] bg-cover bg-center transition-all duration-500 ease-in-out"
         style={{ backgroundImage: `url(${videos![currentIndex].bannerImage})` }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -65,6 +65,19 @@ const MainBanner: React.FC = () => {
             <h1 className="text-6xl font-bold mb-4">
               {videos![currentIndex].name}
             </h1>
+            <div className="flex items-center justify-end">
+              <p
+                className="text-lg"
+                style={{
+                  direction: "ltr",
+                }}
+              >
+                {videos![currentIndex].genres.join(" | ")}
+              </p>{" "}
+              <span className="ml-2 text-green-500"> | </span>{" "}
+              <p> {videos![currentIndex].year} </p>
+            </div>
+
             <p className="mb-8 max-w-lg text-lg">
               {videos![currentIndex].description}
             </p>
