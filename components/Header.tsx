@@ -5,6 +5,7 @@ import { FaSearch } from "react-icons/fa";
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,14 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  const toggleDropdown = () => {
+    setDropdownOpen((prevState) => !prevState);
+  };
+
+  const closeDropdown = () => {
+    setDropdownOpen(false);
+  };
+
   return (
     <header
       className={`fixed z-50 top-0 w-full p-4 flex justify-between items-center transition-colors duration-300 text-white`}
@@ -29,9 +38,41 @@ const Header: React.FC = () => {
       }}
     >
       <div className="flex items-center space-x-4">
-        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
-          الدخول
-        </button>
+        <div className="relative">
+          <Image
+            src="https://via.placeholder.com/40x40"
+            alt="Profile"
+            width={40}
+            height={40}
+            className="cursor-pointer rounded-full"
+            onClick={toggleDropdown}
+          />
+          {dropdownOpen && (
+            <div className="absolute right-[-20] mt-2 w-48 bg-gray-900 text-white rounded-lg shadow-lg">
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-200"
+                onClick={closeDropdown}
+              >
+                قائمتي
+              </a>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-200"
+                onClick={closeDropdown}
+              >
+                معلومات حسابك
+              </a>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-200"
+                onClick={closeDropdown}
+              >
+                تسجيل خروج
+              </a>
+            </div>
+          )}
+        </div>
         <select className="bg-transparent text-white border-none border-white rounded px-2 py-1">
           <option value="ar">عربي</option>
           <option value="en">English</option>
@@ -42,44 +83,19 @@ const Header: React.FC = () => {
       </div>
       <div className="flex items-center justify-center space-x-4 px-8">
         <nav className="flex space-x-10">
-          <a
-            href="#"
-            className="hover:underline text-white
-            text-2xl
-          "
-          >
+          <a href="#" className="hover:underline text-white text-2xl">
             أطفال
           </a>
-          <a
-            href="#"
-            className="hover:underline text-white 
-                  text-2xl
-          "
-          >
+          <a href="#" className="hover:underline text-white text-2xl">
             وثائقيات
           </a>
-          <a
-            href="#"
-            className="hover:underline text-white
-                  text-2xl
-          "
-          >
+          <a href="#" className="hover:underline text-white text-2xl">
             برامج
           </a>
-          <a
-            href="#"
-            className="hover:underline text-white
-                text-2xl
-          "
-          >
+          <a href="#" className="hover:underline text-white text-2xl">
             مسلسلات
           </a>
-          <a
-            href="#"
-            className="hover:underline text-green-500
-            text-2xl
-          "
-          >
+          <a href="#" className="hover:underline text-green-500 text-2xl">
             الرئيسية
           </a>
           <Image
