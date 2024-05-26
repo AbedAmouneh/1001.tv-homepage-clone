@@ -89,7 +89,7 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
         <h2 className="text-2xl font-bold mb-4">{title}</h2>
       </div>
       <div
-        className="relative mt-10 flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300"
+        className="relative flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300"
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -116,9 +116,9 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
                     : video.landscapeImage
                 }
                 alt={video.name}
-                width={hoveredIndex === index ? 400 : 250}
+                width={hoveredIndex === index ? 350 : 250}
                 height={200}
-                className="rounded-lg cursor-pointer object-cover max-h-[250px] transition-all duration-300"
+                className="rounded-lg cursor-pointer object-cover max-h-[200px] transition-all duration-300"
               />
               {hoveredIndex === index && (
                 <div className="absolute inset-0 bg-black bg-opacity-75 flex flex-col justify-center items-center text-white p-4 rounded-lg transition-opacity duration-300">
@@ -132,7 +132,7 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
             </div>
           ))}
       </div>
-      <div className="absolute top-10 left-1/6 flex space-x-2">
+      <div className="absolute top-3 left-1/6 flex space-x-2">
         {videos &&
           videos.map((_, index) => (
             <div
