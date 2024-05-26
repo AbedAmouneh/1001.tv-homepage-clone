@@ -18,30 +18,20 @@ const MainBanner: React.FC = () => {
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartXRef.current = e.targetTouches[0].clientX;
-    console.log("Touch Start:", touchStartXRef.current);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     touchEndXRef.current = e.targetTouches[0].clientX;
-    console.log("Touch Move:", touchEndXRef.current);
   };
 
   const handleTouchEnd = () => {
-    console.log(
-      "Touch End - Start:",
-      touchStartXRef.current,
-      "End:",
-      touchEndXRef.current
-    );
     if (touchStartXRef.current - touchEndXRef.current > touchThreshold) {
-      // Swipe left
       setCurrentIndex((prevIndex) =>
         prevIndex === videos!.length - 1 ? 0 : prevIndex + 1
       );
     }
 
     if (touchEndXRef.current - touchStartXRef.current > touchThreshold) {
-      // Swipe right
       setCurrentIndex((prevIndex) =>
         prevIndex === 0 ? videos!.length - 1 : prevIndex - 1
       );
@@ -55,31 +45,25 @@ const MainBanner: React.FC = () => {
     <div>
       <div
         className="relative h-[100vh] bg-cover bg-center transition-all duration-500 ease-in-out"
-        style={{ backgroundImage: `url(${videos![currentIndex].bannerImage})` }}
+        style={{
+          backgroundImage: `url(${videos![currentIndex]?.bannerImage})`,
+        }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end justify-end p-20">
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end justify-end p-20 bg-gradient-to-t from-black to-transparent">
           <div className="text-right text-white">
             <h1 className="text-6xl font-bold mb-4">
-              {videos![currentIndex].name}
+              {videos![currentIndex]?.name}
             </h1>
-            <div className="flex items-center justify-end">
-              <p
-                className="text-lg"
-                style={{
-                  direction: "ltr",
-                }}
-              >
-                {videos![currentIndex].genres.join(" | ")}
-              </p>{" "}
-              <span className="ml-2 text-green-500"> | </span>{" "}
-              <p> {videos![currentIndex].year} </p>
+            <div className="flex items-center justify-end mb-4 text-lg">
+              <p>{videos![currentIndex]?.genres.join(" | ")}</p>
+              <span className="ml-2 text-green-500">|</span>
+              <p className="ml-2">{videos![currentIndex]?.year}</p>
             </div>
-
             <p className="mb-8 max-w-lg text-lg">
-              {videos![currentIndex].description}
+              {videos![currentIndex]?.description}
             </p>
             <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
               Watch Now
@@ -87,23 +71,29 @@ const MainBanner: React.FC = () => {
           </div>
         </div>
 
-        <div className="absolute left-0 bottom-0 flex items-center p-4 space-x-4 z-10">
+        <div
+          className="absolute left-0 bottom-0 flex items-center p-4 space-x-4 z-10
+          bg-gradient-to-t from-white/20 via-white/15 to-white/20 border border-white/20 my-4 mx-4 border-t-0 
+          rounded-[10px] ml-[105px] mb-[40px]
+        "
+        >
           {videos &&
-            videos
-              .slice(0, 6)
-              .map((video, index) => (
-                <Image
-                  key={video.name}
-                  src={video.portraitImage}
-                  alt={video.name}
-                  width={100}
-                  height={150}
-                  className={`cursor-pointer hover:opacity-75 ${
-                    currentIndex === index ? "opacity-100" : "opacity-50"
-                  }`}
-                  onClick={() => setCurrentIndex(index)}
-                />
-              ))}
+            videos.slice(0, 6).map((video, index) => (
+              <Image
+                key={video.name}
+                src={video.portraitImage}
+                alt={video.name}
+                width={100}
+                height={150}
+                className={`cursor-pointer hover:opacity-75 rounded-lg ${
+                  currentIndex === index
+                    ? "opacity-100 w-[105px]"
+                    : "opacity-50"
+                }
+                  `}
+                onClick={() => setCurrentIndex(index)}
+              />
+            ))}
         </div>
       </div>
     </div>

@@ -30,29 +30,65 @@ const Header: React.FC = () => {
     >
       <div className="flex items-center space-x-4">
         <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
-          Sign In
+          الدخول
         </button>
-        <select className="bg-transparent text-white border border-white rounded px-2 py-1">
+        <select className="bg-transparent text-white border-none border-white rounded px-2 py-1">
+          <option value="ar">عربي</option>
           <option value="en">English</option>
-          <option value="ar">Arabic</option>
         </select>
-        <FaSearch className="text-white" />
+        <div className="cursor-pointer">
+          <FaSearch className="text-white" />
+        </div>
       </div>
-      <div className="flex items-center space-x-4">
-        <nav className="flex space-x-4">
-          <a href="#" className="hover:underline text-white">
-            Home
+      <div className="flex items-center justify-center space-x-4 px-8">
+        <nav className="flex space-x-10">
+          <a
+            href="#"
+            className="hover:underline text-white
+            text-2xl
+          "
+          >
+            أطفال
           </a>
-          <a href="#" className="hover:underline text-white">
-            Series
+          <a
+            href="#"
+            className="hover:underline text-white 
+                  text-2xl
+          "
+          >
+            وثائقيات
           </a>
-          <a href="#" className="hover:underline text-white">
-            Movies
+          <a
+            href="#"
+            className="hover:underline text-white
+                  text-2xl
+          "
+          >
+            برامج
           </a>
-          <a href="#" className="hover:underline text-white">
-            Kids
+          <a
+            href="#"
+            className="hover:underline text-white
+                text-2xl
+          "
+          >
+            مسلسلات
           </a>
-          <Image src="/1001.svg" alt="1001.tv" width={50} height={50} />
+          <a
+            href="#"
+            className="hover:underline text-green-500
+            text-2xl
+          "
+          >
+            الرئيسية
+          </a>
+          <Image
+            src="/1001.svg"
+            alt="1001.tv"
+            className="px-2"
+            width={100}
+            height={100}
+          />
         </nav>
       </div>
     </header>
