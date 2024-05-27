@@ -80,7 +80,7 @@ const MainBanner: React.FC = () => {
           {videos &&
             videos.slice(0, 6).map((video, index) => (
               <Image
-                key={video.name}
+                key={index}
                 src={video.portraitImage}
                 alt={video.name}
                 width={100}

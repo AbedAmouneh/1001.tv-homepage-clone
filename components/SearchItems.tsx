@@ -81,7 +81,9 @@ const SearchItems: React.FC<SearchItemsProps> = ({ videos }) => {
       onMouseEnter={() => setControlsVisible(true)}
       onMouseLeave={() => setControlsVisible(false)}
     >
-              <h1 className="text-4xl font-bold mb-4 flex justify-center ">أفلام حصرية</h1>
+      <h1 className="text-4xl font-bold mb-4 flex justify-center ">
+        أفلام حصرية
+      </h1>
 
       <div className=" w-fit">
         <div
@@ -96,7 +98,7 @@ const SearchItems: React.FC<SearchItemsProps> = ({ videos }) => {
           {videos &&
             videos.slice(0, 10).map((video, index) => (
               <div
-                key={video.name}
+                key={index}
                 className={`flex-shrink-0 transition-transform duration-300 ${
                   currentIndex === index ? "scale-105" : "scale-100"
                 } relative`}
