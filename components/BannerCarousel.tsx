@@ -85,7 +85,7 @@ const BannerCarousel: React.FC = () => {
         {videos &&
           videos.map((video, index) => (
             <div
-              key={video.name}
+              key={index}
               className={`flex-shrink-0 transition-transform duration-300 ${
                 currentIndex === index ? "scale-105" : "scale-100"
               } relative`}
