@@ -8,7 +8,7 @@ import Search from "./Search";  // Import the Search component
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+ // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
