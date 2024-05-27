@@ -98,13 +98,16 @@ const Header: React.FC = () => {
           <a href="#" className="hover:underline text-green-500 text-2xl">
             الرئيسية
           </a>
+          <a href="https://1001.tv/" >
           <Image
             src="/1001.svg"
             alt="1001.tv"
             className="px-2"
             width={100}
             height={100}
+            
           />
+          </a>
         </nav>
       </div>
     </header>
