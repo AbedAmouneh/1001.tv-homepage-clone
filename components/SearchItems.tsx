@@ -97,7 +97,7 @@ const SearchItems: React.FC<SearchItemsProps> = ({ videos }) => {
               className={`flex-shrink-0 transition-transform duration-300 ${
                 currentIndex === index ? "scale-105" : "scale-100"
               } relative`}
-              style={{ transform: ⁠ translateX(-${currentIndex * 100}%) ⁠ }}
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
               onDragStart={(e) => e.preventDefault()}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
@@ -123,19 +123,6 @@ const SearchItems: React.FC<SearchItemsProps> = ({ videos }) => {
                 </div>
               )}
             </div>
-          ))}
-      </div>
-      <div className="absolute top-3 left-1/6 flex space-x-2">
-        {videos &&
-          videos.slice(0, 10).map((_, index) => (
-            <div
-              key={index}
-              onClick={() => handlePaginationClick(index)}
-              className={`w-4 h-2 rounded-full cursor-pointer ${
-                index === currentIndex ? "bg-green-500" : "bg-gray-500"
-              }`}
-              style={{ opacity: controlsVisible ? 1 : 0 }}
-            ></div>
           ))}
       </div>
     </div>
