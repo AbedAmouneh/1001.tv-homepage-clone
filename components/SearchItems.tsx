@@ -82,7 +82,7 @@ const SearchItems: React.FC<SearchItemsProps> = ({ videos }) => {
       onMouseLeave={() => setControlsVisible(false)}
     >
       <div
-        className="relative flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300"
+        className="relative flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300 flex-wrap gap-5"
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
