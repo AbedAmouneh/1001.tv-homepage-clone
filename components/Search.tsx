@@ -34,7 +34,7 @@ const Search: React.FC = () => {
         onClick={toggleSearch}
       />
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-slate-900 z-40 m-0">
+        <div className="fixed inset-0 bg-black bg-slate-900 z-40 m-0  w-full left-[-16px]">
           <Header />
           <div className="relative w-full max-w-6xl mx-auto mt-16 p-4 flex items-center justify-center">
             <div className="flex items-center w-full">

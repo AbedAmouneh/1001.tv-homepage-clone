@@ -77,53 +77,57 @@ const SearchItems: React.FC<SearchItemsProps> = ({ videos }) => {
 
   return (
     <div
-      className="relative bg-gray-900 p-8 pt-15"
+      className="relative bg-gray-900 p-8 pt-15 "
       onMouseEnter={() => setControlsVisible(true)}
       onMouseLeave={() => setControlsVisible(false)}
     >
-      <div
-        className="relative flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300 flex-wrap gap-5"
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        style={{ cursor: isDragging ? "grabbing" : "grab" }}
-      >
-        {videos &&
-          videos.slice(0, 10).map((video, index) => (
-            <div
-              key={video.name}
-              className={`flex-shrink-0 transition-transform duration-300 ${
-                currentIndex === index ? "scale-105" : "scale-100"
-              } relative`}
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              onDragStart={(e) => e.preventDefault()}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Image
-                src={
-                  hoveredIndex === index
-                    ? video.bannerImage
-                    : video.landscapeImage
-                }
-                alt={video.name}
-                width={hoveredIndex === index ? 350 : 250}
-                height={200}
-                className="rounded-lg cursor-pointer object-cover max-h-[200px] transition-all duration-300"
-              />
-              {hoveredIndex === index && (
-                <div className="absolute inset-0 bg-black bg-opacity-75 flex flex-col justify-center items-center text-white p-4 rounded-lg transition-opacity duration-300">
-                  <h3 className="text-lg font-bold mb-2">{video.name}</h3>
-                  <p className="mb-4">{video.genres.join(" | ")}</p>
-                  <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
-                    Play
-                  </button>
-                </div>
-              )}
-            </div>
-          ))}
+              <h1 className="text-4xl font-bold mb-4 flex justify-center ">أفلام حصرية</h1>
+
+      <div className=" w-fit">
+        <div
+          className="relative grid grid-cols-5 grid-rows-2 gap-5 w-full transition-transform duration-300 ml-4"
+          ref={containerRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          style={{ cursor: isDragging ? "grabbing" : "grab" }}
+        >
+          {videos &&
+            videos.slice(0, 10).map((video, index) => (
+              <div
+                key={video.name}
+                className={`flex-shrink-0 transition-transform duration-300 ${
+                  currentIndex === index ? "scale-105" : "scale-100"
+                } relative`}
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Image
+                  src={
+                    hoveredIndex === index
+                      ? video.bannerImage
+                      : video.landscapeImage
+                  }
+                  alt={video.name}
+                  width={hoveredIndex === index ? 350 : 250}
+                  height={200}
+                  className="rounded-lg cursor-pointer object-cover max-h-[200px] transition-all duration-300"
+                />
+                {hoveredIndex === index && (
+                  <div className="absolute inset-0 bg-black bg-opacity-75 flex flex-col justify-center items-center text-white p-4 rounded-lg transition-opacity duration-300">
+                    <h3 className="text-lg font-bold mb-2">{video.name}</h3>
+                    <p className="mb-4">{video.genres.join(" | ")}</p>
+                    <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+                      Play
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
