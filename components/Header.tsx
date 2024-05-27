@@ -1,7 +1,9 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaSearch } from "react-icons/fa";
+import Search from "./Search";  // Import the Search component
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -39,14 +41,14 @@ const Header: React.FC = () => {
     >
       <div className="flex items-center space-x-4">
         <div className="relative">
-          <Image
+          {/* <Image
             src="https://via.placeholder.com/40x40"
             alt="Profile"
             width={40}
             height={40}
             className="cursor-pointer rounded-full"
             onClick={toggleDropdown}
-          />
+          /> */}
           {dropdownOpen && (
             <div className="absolute right-[-20] mt-2 w-48 bg-gray-900 text-white rounded-lg shadow-lg">
               <a
@@ -77,9 +79,7 @@ const Header: React.FC = () => {
           <option value="ar">عربي</option>
           <option value="en">English</option>
         </select>
-        <div className="cursor-pointer">
-          <FaSearch className="text-white" />
-        </div>
+        <Search />
       </div>
       <div className="flex items-center justify-center space-x-4 px-8">
         <nav className="flex space-x-10">

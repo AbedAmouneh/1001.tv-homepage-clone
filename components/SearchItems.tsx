@@ -17,15 +17,11 @@ interface Video {
   isOriginal: boolean;
 }
 
-interface StandardCarouselProps {
-  title: string;
+interface SearchItemsProps {
   videos: Video[];
 }
 
-const StandardCarousel: React.FC<StandardCarouselProps> = ({
-  title,
-  videos,
-}) => {
+const SearchItems: React.FC<SearchItemsProps> = ({ videos }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
@@ -81,15 +77,12 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
 
   return (
     <div
-      className="relative bg-gray-900 p-8 pt-15 w-[100vw]"
+      className="relative bg-gray-900 p-8 pt-15"
       onMouseEnter={() => setControlsVisible(true)}
       onMouseLeave={() => setControlsVisible(false)}
     >
-      <div className="absolute top-0 right-10 text-white text-left pr-4">
-        <h2 className="text-2xl font-bold mb-4">{title}</h2>
-      </div>
       <div
-        className="relative flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300 mt-10  "
+        className="relative flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300"
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -98,13 +91,13 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
         style={{ cursor: isDragging ? "grabbing" : "grab" }}
       >
         {videos &&
-          videos.map((video, index) => (
+          videos.slice(0, 10).map((video, index) => (
             <div
               key={video.name}
               className={`flex-shrink-0 transition-transform duration-300 ${
                 currentIndex === index ? "scale-105" : "scale-100"
               } relative`}
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              style={{ transform: ⁠ translateX(-${currentIndex * 100}%) ⁠ }}
               onDragStart={(e) => e.preventDefault()}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
@@ -134,7 +127,7 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
       </div>
       <div className="absolute top-3 left-1/6 flex space-x-2">
         {videos &&
-          videos.map((_, index) => (
+          videos.slice(0, 10).map((_, index) => (
             <div
               key={index}
               onClick={() => handlePaginationClick(index)}
@@ -149,4 +142,4 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
   );
 };
 
-export default StandardCarousel;
+export default SearchItems;
