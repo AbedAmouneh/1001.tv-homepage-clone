@@ -11,12 +11,6 @@ const Search: React.FC = () => {
   const { data: titleWithVideos, isLoading, error } = useVideos();
   const [updatedVideosArray, setUpdatedVideosArray] = useState<any[]>([]);
 
-  if (error) return <div>Error: {error.message}</div>;
-
-  const toggleSearch = () => {
-    setIsOpen(!isOpen);
-  };
-
   useEffect(() => {
     if (titleWithVideos) {
       const allVideos = titleWithVideos.reduce((acc: any[], item: any) => {
@@ -26,6 +20,12 @@ const Search: React.FC = () => {
       setUpdatedVideosArray(updatedArray);
     }
   }, [titleWithVideos]);
+
+  if (error) return <div>Error: {error.message}</div>;
+
+  const toggleSearch = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
