@@ -10,7 +10,7 @@ const ParentComponent: React.FC = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="container">
+    <div className="container w-full">
       {titleWithVideos &&
         titleWithVideos.map((item, index) => (
           <div key={index}>

@@ -81,7 +81,7 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
 
   return (
     <div
-      className="relative bg-gray-900 p-8 pt-15 w-[100vw]"
+      className="relative bg-gray-900 p-8 pt-15 min-w-[98.9vw] overflow-hidden"
       onMouseEnter={() => setControlsVisible(true)}
       onMouseLeave={() => setControlsVisible(false)}
     >
@@ -89,7 +89,7 @@ const StandardCarousel: React.FC<StandardCarouselProps> = ({
         <h2 className="text-2xl font-bold mb-4">{title}</h2>
       </div>
       <div
-        className="relative flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300 mt-10  "
+        className="relative flex items-center overflow-hidden space-x-5 w-full transition-transform duration-300 mt-10 "
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}

@@ -58,7 +58,7 @@ const MainBanner: React.FC = () => {
               {videos![currentIndex]?.name}
             </h1>
             <div className="flex items-center justify-end mb-4 text-lg">
-              <p>{videos![currentIndex]?.genres.join(" | ")}</p>
+              <p>{videos![currentIndex]?.genres?.join(" | ")}</p>
               <span className="ml-2 text-green-500">|</span>
               <p className="ml-2">{videos![currentIndex]?.year}</p>
             </div>
