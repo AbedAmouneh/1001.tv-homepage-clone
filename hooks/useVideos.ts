@@ -29,7 +29,7 @@ interface TitleWithVideos {
 
 const fetchVideos = async ({
   queryKey,
-}: QueryFunctionContext): Promise<TitleWithVideos[] | Video[]> => {
+}: QueryFunctionContext): Promise<TitleWithVideos[]> => {
   const [, title] = queryKey;
   const response = await fetch("https://mangopulse.net/1001-data.json");
   if (!response.ok) {
@@ -48,12 +48,12 @@ const fetchVideos = async ({
     if (!targetObject) {
       throw new Error("No matching object found");
     }
-    return targetObject.videos;
+    return [{ title: targetObject.title, videos: targetObject.videos }];
   }
 };
 
-export const useVideos = (title: string) => {
-  return useQuery<TitleWithVideos[] | Video[], Error>({
+export const useVideos = (title?: string) => {
+  return useQuery<any[], Error>({
     queryKey: ["videos", title],
     queryFn: fetchVideos,
   });
